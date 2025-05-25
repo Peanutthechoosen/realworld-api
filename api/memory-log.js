@@ -7,9 +7,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing eventType or description' });
   }
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_KEY;
-
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
   const result = await fetch(`${supabaseUrl}/rest/v1/logs`, {
     method: 'POST',
@@ -27,14 +26,13 @@ export default async function handler(req, res) {
   });
 
   let data = null;
-try {
-  const text = await result.text();
-  data = text ? JSON.parse(text) : {};
-} catch (err) {
-  console.error('Fehler beim Parsen der Antwort:', err);
-  data = { parseError: true };
-}
-
+  try {
+    const text = await result.text();
+    data = text ? JSON.parse(text) : {};
+  } catch (err) {
+    console.error('Fehler beim Parsen der Antwort:', err);
+    data = { parseError: true };
+  }
 
   if (!result.ok) {
     return res.status(result.status).json({ error: 'Supabase error', details: data });
