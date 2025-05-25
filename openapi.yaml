@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: Real World Engine API
-  version: 1.0.0
-  description: GPT-safe API for realism-based decision, world updates, logging and rule enforcement.
+  version: 1.1.0
+  description: GPT-safe API for realism-based decision, world updates, memory and rule control.
 servers:
   - url: https://realworld-api.vercel.app
 paths:
@@ -134,33 +134,35 @@ paths:
                     type: boolean
                   stored:
                     type: object
-  /api/check-violation:
-    post:
-      summary: Check for storytelling violations
-      operationId: checkViolation
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [text]
-              properties:
-                text:
-                  type: string
+  /api/memory-read:
+    get:
+      summary: Read filtered memory entries
+      operationId: memoryRead
+      parameters:
+        - in: query
+          name: actor
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: type
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: latest
+          schema:
+            type: string
+          required: false
       responses:
         '200':
-          description: Violation results
+          description: Memory entries list
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  valid:
-                    type: boolean
-                  comment:
-                    type: string
-                  violations:
+                  entries:
                     type: array
                     items:
-                      type: string
+                      type: object
