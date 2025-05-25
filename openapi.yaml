@@ -16,14 +16,16 @@ paths:
           application/json:
             schema:
               type: object
-              required: [situation, npc]
+              required:
+                - situation
+                - npc
               properties:
                 situation:
                   type: string
                 npc:
                   type: string
       responses:
-        '200':
+        "200":
           description: Decision result
           content:
             application/json:
@@ -48,7 +50,10 @@ paths:
           application/json:
             schema:
               type: object
-              required: [scene, timePassed, npcsInvolved]
+              required:
+                - scene
+                - timePassed
+                - npcsInvolved
               properties:
                 scene:
                   type: string
@@ -59,7 +64,7 @@ paths:
                   items:
                     type: string
       responses:
-        '200':
+        "200":
           description: Continuation result
           content:
             application/json:
@@ -80,14 +85,16 @@ paths:
           application/json:
             schema:
               type: object
-              required: [lastKnownState, hoursPassed]
+              required:
+                - lastKnownState
+                - hoursPassed
               properties:
                 lastKnownState:
                   type: string
                 hoursPassed:
                   type: number
       responses:
-        '200':
+        "200":
           description: Update summary and world events
           content:
             application/json:
@@ -112,7 +119,9 @@ paths:
           application/json:
             schema:
               type: object
-              required: [eventType, description]
+              required:
+                - eventType
+                - description
               properties:
                 eventType:
                   type: string
@@ -123,7 +132,7 @@ paths:
                 timestamp:
                   type: string
       responses:
-        '200':
+        "200":
           description: Log confirmation
           content:
             application/json:
@@ -155,7 +164,7 @@ paths:
             type: string
           required: false
       responses:
-        '200':
+        "200":
           description: Memory entries list
           content:
             application/json:
