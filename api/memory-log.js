@@ -1,3 +1,8 @@
+import { writeJson, readJson, pathExists } from 'fs-extra';
+import { join } from 'path';
+
+const LOG_PATH = './memory-log.json';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Only POST allowed' });
 
@@ -11,6 +16,14 @@ export default async function handler(req, res) {
     timestamp: timestamp || new Date().toISOString()
   };
 
-  console.log('Log:', entry);
+  let data = [];
+
+  if (await pathExists(LOG_PATH)) {
+    data = await readJson(LOG_PATH);
+  }
+
+  data.push(entry);
+  await writeJson(LOG_PATH, data, { spaces: 2 });
+
   res.status(200).json({ success: true, stored: entry });
 }
