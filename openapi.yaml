@@ -5,6 +5,7 @@ info:
   description: GPT-safe API for realism-based decision, world updates, memory and rule control.
 servers:
   - url: https://realworld-api.vercel.app
+
 paths:
   /api/npc-decide:
     post:
@@ -40,6 +41,7 @@ paths:
                     type: string
                   rationale:
                     type: string
+
   /api/scene-continue:
     post:
       summary: Decide if a scene can continue logically
@@ -75,6 +77,7 @@ paths:
                     type: boolean
                   reason:
                     type: string
+
   /api/world-update:
     post:
       summary: Simulate changes in world over time
@@ -109,6 +112,7 @@ paths:
                     type: array
                     items:
                       type: string
+
   /api/memory-log:
     post:
       summary: Log memory-relevant events
@@ -143,6 +147,7 @@ paths:
                     type: boolean
                   stored:
                     type: object
+
   /api/memory-read:
     get:
       summary: Read filtered memory entries
