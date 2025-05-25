@@ -26,7 +26,15 @@ export default async function handler(req, res) {
     })
   });
 
-  const data = await result.json();
+  let data = null;
+try {
+  const text = await result.text();
+  data = text ? JSON.parse(text) : {};
+} catch (err) {
+  console.error('Fehler beim Parsen der Antwort:', err);
+  data = { parseError: true };
+}
+
 
   if (!result.ok) {
     return res.status(result.status).json({ error: 'Supabase error', details: data });
