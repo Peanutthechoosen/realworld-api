@@ -14,6 +14,6 @@
     { "src": "/api/world-update", "dest": "api/world-update.js" },
     { "src": "/api/memory-log", "dest": "api/memory-log.js" },
     { "src": "/api/check-violation", "dest": "api/check-violation.js" },
-    { "src": "/api/memory-read", "dest": "api/memoryRead.js" }
+    { "src": "/api/memory-read", "dest": "api/memory-read.js" }
   ]
 }
