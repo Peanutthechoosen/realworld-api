@@ -9,7 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://realworld-api.vercel.app/openapi.yaml"
+    "url": "https://raw.githubusercontent.com/Peanutthechoosen/realworld-api/main/openapi.yaml"
   },
   "logo_url": "https://realworld-api.vercel.app/logo.png",
   "contact_email": "support@example.com",

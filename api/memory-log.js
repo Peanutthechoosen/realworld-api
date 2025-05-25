@@ -1,13 +1,8 @@
-export default function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST requests allowed' });
-  }
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Only POST allowed' });
 
   const { eventType, description, actor, timestamp } = req.body;
-
-  if (!eventType || !description) {
-    return res.status(400).json({ error: 'Missing fields: eventType, description' });
-  }
+  if (!eventType || !description) return res.status(400).json({ error: 'Missing eventType or description' });
 
   const entry = {
     eventType,
@@ -16,11 +11,6 @@ export default function handler(req, res) {
     timestamp: timestamp || new Date().toISOString()
   };
 
-  // In einer echten API würdest du hier persistieren (z.B. DB oder JSON-Datei)
-  console.log('Log-Eintrag:', entry);
-
-  res.status(200).json({
-    success: true,
-    stored: entry
-  });
+  console.log('Log:', entry);
+  res.status(200).json({ success: true, stored: entry });
 }
