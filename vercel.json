@@ -1,9 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.js", "use": "@vercel/node" }
+    { "src": "api/npc-decide.js", "use": "@vercel/node" },
+    { "src": "api/scene-continue.js", "use": "@vercel/node" },
+    { "src": "api/world-update.js", "use": "@vercel/node" },
+    { "src": "api/memory-log.js", "use": "@vercel/node" },
+    { "src": "api/check-violation.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "index.js" }
+    { "src": "/api/npc-decide", "dest": "api/npc-decide.js" },
+    { "src": "/api/scene-continue", "dest": "api/scene-continue.js" },
+    { "src": "/api/world-update", "dest": "api/world-update.js" },
+    { "src": "/api/memory-log", "dest": "api/memory-log.js" },
+    { "src": "/api/check-violation", "dest": "api/check-violation.js" }
   ]
 }
