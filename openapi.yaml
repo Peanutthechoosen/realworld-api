@@ -148,7 +148,7 @@ paths:
                   stored:
                     type: object
 
-  /api/memoryread:
+  /api/memory-read:
     get:
       summary: Read filtered memory entries
       operationId: memoryRead
