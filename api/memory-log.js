@@ -7,8 +7,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing eventType or description' });
   }
 
-  const supabaseUrl = 'https://tajcituowtduzqmhnhsr.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRhamNpdHVvd3RkdXpxbWhuaHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxODg0OTMsImV4cCI6MjA2Mzc2NDQ5M30.8jFcF9MkhZs6iUmqKYKKljNx6SNiTofYeSyN_CyNqXM';
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+
 
   const result = await fetch(`${supabaseUrl}/rest/v1/logs`, {
     method: 'POST',
