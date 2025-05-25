@@ -1,0 +1,166 @@
+openapi: 3.1.0
+info:
+  title: Real World Engine API
+  version: 1.0.0
+  description: GPT-safe API for realism-based decision, world updates, logging and rule enforcement.
+servers:
+  - url: https://realworld-api.vercel.app
+paths:
+  /api/npc-decide:
+    post:
+      summary: Decide NPC behavior based on world logic
+      operationId: npcDecide
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [situation, npc]
+              properties:
+                situation:
+                  type: string
+                npc:
+                  type: string
+      responses:
+        '200':
+          description: Decision result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  npc:
+                    type: string
+                  situation:
+                    type: string
+                  decision:
+                    type: string
+                  rationale:
+                    type: string
+  /api/scene-continue:
+    post:
+      summary: Decide if a scene can continue logically
+      operationId: sceneContinue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [scene, timePassed, npcsInvolved]
+              properties:
+                scene:
+                  type: string
+                timePassed:
+                  type: number
+                npcsInvolved:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Continuation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  continueAllowed:
+                    type: boolean
+                  reason:
+                    type: string
+  /api/world-update:
+    post:
+      summary: Simulate changes in world over time
+      operationId: worldUpdate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [lastKnownState, hoursPassed]
+              properties:
+                lastKnownState:
+                  type: string
+                hoursPassed:
+                  type: number
+      responses:
+        '200':
+          description: Update summary and world events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: boolean
+                  summary:
+                    type: string
+                  worldEvents:
+                    type: array
+                    items:
+                      type: string
+  /api/memory-log:
+    post:
+      summary: Log memory-relevant events
+      operationId: memoryLog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [eventType, description]
+              properties:
+                eventType:
+                  type: string
+                description:
+                  type: string
+                actor:
+                  type: string
+                timestamp:
+                  type: string
+      responses:
+        '200':
+          description: Log confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  stored:
+                    type: object
+  /api/check-violation:
+    post:
+      summary: Check for storytelling violations
+      operationId: checkViolation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Violation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  comment:
+                    type: string
+                  violations:
+                    type: array
+                    items:
+                      type: string
