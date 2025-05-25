@@ -6,7 +6,7 @@
     { "src": "api/world-update.js", "use": "@vercel/node" },
     { "src": "api/memory-log.js", "use": "@vercel/node" },
     { "src": "api/check-violation.js", "use": "@vercel/node" },
-    { "src": "api/memoryRead.js", "use": "@vercel/node" }
+    { "src": "api/memory-read.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/api/npc-decide", "dest": "api/npc-decide.js" },
