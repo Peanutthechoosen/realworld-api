@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Realworld Engine",
+  "name_for_model": "realworld_engine",
+  "description_for_human": "Simuliert realistische Weltlogik mit unabhängigen NSC-Reaktionen, Zeitfortschritt und Regelkontrolle.",
+  "description_for_model": "A realism-based API that drives decisions, scene logic, memory, and violation checks without narrative bias.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://realworld-api.vercel.app/openapi.yaml"
+  },
+  "logo_url": "https://realworld-api.vercel.app/logo.png",
+  "contact_email": "support@example.com",
+  "legal_info_url": "https://realworld-api.vercel.app/legal"
+}
