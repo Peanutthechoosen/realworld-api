@@ -1,42 +1,38 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Only POST allowed' });
-
-  const { eventType, description, actor, timestamp } = req.body;
-
-  if (!eventType || !description) {
-    return res.status(400).json({ error: 'Missing eventType or description' });
-  }
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Only GET allowed' });
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-  const result = await fetch(`${supabaseUrl}/rest/v1/logs`, {
-    method: 'POST',
+  const { actor, type, latest } = req.query;
+  let query = `select=*`;
+
+  if (actor) query += `&actor=eq.${actor}`;
+  if (type) query += `&event_type=eq.${type}`;
+
+  const result = await fetch(`${supabaseUrl}/rest/v1/logs?${query}`, {
     headers: {
-      'Content-Type': 'application/json',
       'apikey': supabaseKey,
       'Authorization': `Bearer ${supabaseKey}`
-    },
-    body: JSON.stringify({
-      event_type: eventType,
-      description,
-      actor: actor || 'system',
-      timestamp: timestamp || new Date().toISOString()
-    })
+    }
   });
 
   const text = await result.text();
-  let data = {};
+  let data = [];
 
   try {
     data = JSON.parse(text);
   } catch (err) {
-    console.error('Antwort war kein valides JSON:', text);
+    console.error('Fehler beim Parsen:', text);
   }
 
   if (!result.ok) {
-    return res.status(result.status).json({ error: 'Supabase error', details: data });
+    return res.status(result.status).json({ error: 'Supabase fetch error', details: data });
   }
 
-  res.status(200).json({ success: true, stored: data });
+  if (latest === 'true' && data.length > 0) {
+    return res.status(200).json({ entries: [data[data.length - 1]] });
+  }
+
+  res.status(200).json({ entries: data });
 }
