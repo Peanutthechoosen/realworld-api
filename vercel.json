@@ -6,7 +6,8 @@
     { "src": "api/world-update.js", "use": "@vercel/node" },
     { "src": "api/memory-log.js", "use": "@vercel/node" },
     { "src": "api/check-violation.js", "use": "@vercel/node" },
-    { "src": "api/memory-read.js", "use": "@vercel/node" }
+    { "src": "api/memory-read.js", "use": "@vercel/node" },
+    { "src": "api/npc-profile.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/api/npc-decide", "dest": "api/npc-decide.js" },
@@ -14,6 +15,7 @@
     { "src": "/api/world-update", "dest": "api/world-update.js" },
     { "src": "/api/memory-log", "dest": "api/memory-log.js" },
     { "src": "/api/check-violation", "dest": "api/check-violation.js" },
-    { "src": "/api/memory-read", "dest": "api/memory-read.js" }
+    { "src": "/api/memory-read", "dest": "api/memory-read.js" },
+    { "src": "/api/npc-profile", "dest": "api/npc-profile.js" }
   ]
 }
